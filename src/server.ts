@@ -40,7 +40,7 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
     try {
       const filteredpath = await filterImageFromURL(image_url)
 
-      await res.sendFile(filteredpath, {}, (err) => {
+      await res.status(200).sendFile(filteredpath, {}, (err) => {
         if (err) { return res.status(422).send(`Not able to process the image`); }
         // Deleting the used image file.
         deleteLocalFiles([filteredpath])
@@ -49,13 +49,13 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
       res.status(422).send(`Not able to process the image, Make sure image url is correct`);
     }
   });
-  
+
   //! END @TODO1
 
   // Root Endpoint
   // Displays a simple message to the user
   app.get("/", async (req, res) => {
-    res.send("try GET /filteredimage?image_url={{}}")
+    res.status(200).send("try GET /filteredimage?image_url={{}}")
   });
 
 
